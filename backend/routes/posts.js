@@ -6,14 +6,17 @@ router.route('/').get((req, res) => {
   const username = req.query.username;
   if (postId) {
     Post.find({ postId: postId })
+      .sort({ createdAt: -1})
       .then(posts => res.json(posts))
       .catch(err => res.status(400).json('Error: ' + err));
   }else if (username) {
     Post.find({ username: username })
+    .sort({ createdAt: -1})
     .then(posts => res.json(posts))
     .catch(err => res.status(400).json('Error: ' + err));
   }else {
     Post.find()
+      .sort({ createdAt: -1})
       .then(posts => res.json(posts))
       .catch(err => res.status(400).json('Error: ' + err));
   }

@@ -5,10 +5,12 @@ router.route('/').get((req, res) => {
   const rmId = req.query.rmId;
   if (rmId) {
     Message.find({ rmId: rmId })
+      .sort({ createdAt: -1})
       .then(messages => res.json(messages))
       .catch(err => res.status(400).json('Error: ' + err));
   }else {
     Message.find()
+    .sort({ createdAt: -1})
     .then(messages => res.json(messages))
     .catch(err => res.status(400).json('Error: ' + err));
   }
